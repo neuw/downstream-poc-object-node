@@ -25,7 +25,17 @@ public class MockService {
             mockServiceResponse.put(propertyKey, propertyValue);
         }
 
-        mockServiceResponse.put("count", numberOfProps);
+        mockServiceResponse.put("eld", "test");
+        mockServiceResponse.put("eId", "test");
+        mockServiceResponse.put("eid", "test");
+
+        ObjectNode subNode = JsonTransformer.OBJECT_MAPPER.createObjectNode();
+        subNode.put("eld", "test");
+        subNode.put("eId", "test");
+        subNode.put("eid", "test");
+
+        mockServiceResponse.set("sub", subNode);
+        mockServiceResponse.put("message", "the counts of dynamic PROPERTY_* are - "+numberOfProps);
 
         response.type("application/json");
 
