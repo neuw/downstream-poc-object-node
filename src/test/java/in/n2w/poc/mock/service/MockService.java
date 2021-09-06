@@ -35,7 +35,7 @@ public class MockService {
         subNode.put("eid", "test");
 
         mockServiceResponse.set("sub", subNode);
-        mockServiceResponse.put("message", "the counts of dynamic PROPERTY_* are - "+numberOfProps);
+        mockServiceResponse.put("message", "the count of dynamic PROPERTY_* are - "+numberOfProps);
 
         response.type("application/json");
 

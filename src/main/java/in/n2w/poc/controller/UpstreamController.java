@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.net.URI;
 
 /**
@@ -26,6 +29,16 @@ public class UpstreamController {
     @GetMapping("/v1/mock/upstream")
     public ObjectNode getResponseViaUpstream() {
         return restTemplate.getForObject(URI.create(DOWNSTREAM_URL), ObjectNode.class);
+    }
+
+    // wrong approach
+    @GetMapping("/v1/mock/upstream/wrong")
+    public void getResponseViaUpstream(final HttpServletResponse response, final HttpServletRequest request) throws IOException {
+        response.addHeader("content-type", "application/json");
+        response.getWriter().print(restTemplate.getForObject(URI.create(DOWNSTREAM_URL), String.class));
+        response.getWriter().flush();
+        response.getWriter().close();
+        //return restTemplate.getForObject(URI.create(DOWNSTREAM_URL), ObjectNode.class);
     }
 
 }
