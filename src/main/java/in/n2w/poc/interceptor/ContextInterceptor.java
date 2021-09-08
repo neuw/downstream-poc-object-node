@@ -24,6 +24,5 @@ public class ContextInterceptor implements HandlerInterceptor {
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         log.info("request intercepted post-request");
         response.addHeader("uuid", UUID.randomUUID().toString());
-        response.setHeader("uuid", UUID.randomUUID().toString());
     }
 }

@@ -2,6 +2,7 @@ package in.n2w.poc.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -19,6 +20,7 @@ import java.net.URI;
 /**
  * @author Karanbir Singh on 09/03/2021
  */
+@Slf4j
 @RestController
 public class UpstreamController {
 
@@ -35,6 +37,9 @@ public class UpstreamController {
 
     @PostMapping("/v1/mock/upstream")
     public ObjectNode postObject(@RequestBody final ObjectNode requestBody) {
+        if (requestBody.has("test")) {
+            log.info("value of the text field is - "+requestBody.get("test").toPrettyString());
+        }
         return requestBody;
     }
 
